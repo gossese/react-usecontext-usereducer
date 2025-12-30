@@ -69,18 +69,17 @@ function App() {
 
   let ctxValue = {
     items : shoppingCart.items, //this is the state array
-    addItemToCart: handleAddItemToCart
+    addItemToCart: handleAddItemToCart,
+    updateCartItemQuantity: handleUpdateCartItemQuantity
   }
 
   return (
     <CartContext value={ctxValue}>
-      <Header
-        cart={shoppingCart}
-        onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
-      />
+      <Header/>
       <Shop onAddItemToCart={handleAddItemToCart}>
+        {/* the following is Component Composition: lifting a part of a component to a higher level, leaving the Shop component as a mere wrapper */}
         {DUMMY_PRODUCTS.map((product) => (
-          <li key={product.id}>
+          <li key={product.id}> 
             <Product {...product} />
           </li>
         ))}
